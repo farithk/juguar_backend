@@ -19,23 +19,22 @@ app.use(function(req, res, next) {
 });
 
 
-let user;
-
-getUser();
-async function getUser() {
-  try {
-    const response = await axios.get('https://torre.bio/api/bios/farithcomas');
-    console.log(response.data);
-    user = response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 app.get('/', (req, res) => {
   console.log("call from front");
   //console.log(user);
   res.send(user);
+});
+
+app.post('/user', async (req, res) => {
+  console.log("call from front");
+  
+  try{
+    const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}`);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+
 });
 
 app.listen(3030);
