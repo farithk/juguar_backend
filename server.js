@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => {
   console.log("call from front");
   //console.log(user);
-  res.send(user);
+  res.send("testing");
 });
 
 app.post('/user', async (req, res) => {
