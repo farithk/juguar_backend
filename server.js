@@ -27,25 +27,74 @@ app.get('/', (req, res) => {
 
 app.post('/user', async (req, res) => {
   //console.log("call from front");
-
   try{
     const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}`);
       res.send(response.data);
   } catch (error) {
     //console.error(error);
   }
-
 });
 
 app.post('/connection', async (req, res) => {
-  console.log("call from front");
+  console.log(req.body);
   try{
     const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}/jobs/connections`);
       res.send(response.data);
   } catch (error) {
     console.error(error);
   }
-
 });
 
-app.listen(3030);
+app.post('/search/people', async (req, res) => {
+  console.log(req.body);
+  try{
+    const response = await axios.post(`https://search.torre.co/people/_search/?size=3`, req.body);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/search/people/full', async (req, res) => {
+  console.log(req.body);
+  try{
+    const response = await axios.post(`https://search.torre.co/people/_search/?size=100`, req.body);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/search/job', async (req, res) => {
+  console.log(req.body);
+  try{
+    const response = await axios.post(`https://search.torre.co/opportunities/_search?size=3`, req.body);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/search/job/full', async (req, res) => {
+  console.log(req.body);
+  try{
+    const response = await axios.post(`https://search.torre.co/opportunities/_search?size=100`, req.body);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/search/job/id', async (req, res) => {
+  console.log(req.body);
+  try{
+    const response = await axios.get(`https://torre.co/api/opportunities/${req.body.id}`);
+      res.send(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.listen(process.env.PORT || 3030, () => {
+  console.log("Server Listening on Port 3030");
+});
