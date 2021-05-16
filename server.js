@@ -26,10 +26,21 @@ app.get('/', (req, res) => {
 });
 
 app.post('/user', async (req, res) => {
-  console.log("call from front");
-  
+  //console.log("call from front");
+
   try{
     const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}`);
+      res.send(response.data);
+  } catch (error) {
+    //console.error(error);
+  }
+
+});
+
+app.post('/connection', async (req, res) => {
+  console.log("call from front");
+  try{
+    const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}/jobs/connections`);
       res.send(response.data);
   } catch (error) {
     console.error(error);
