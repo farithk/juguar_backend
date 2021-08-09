@@ -19,75 +19,25 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => {
-  console.log("call from front");
+  //console.log("call from front");
   //console.log(user);
   res.send("testing");
 });
 
-app.post('/user', async (req, res) => {
-  //console.log("call from front");
-  try{
-    const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}`);
-      res.send(response.data);
-  } catch (error) {
-    //console.error(error);
-  }
-});
-
-app.post('/connection', async (req, res) => {
+app.get('/countries', async (req, res) => {
   console.log(req.body);
   try{
-    const response = await axios.get(`https://torre.bio/api/bios/${req.body.user}/jobs/connections`);
+    const response = await axios.get(`https://restcountries.eu/rest/v2/all`);
       res.send(response.data);
   } catch (error) {
     console.error(error);
   }
 });
 
-app.post('/search/people', async (req, res) => {
+app.post('/countries', async (req, res) => {
   console.log(req.body);
   try{
-    const response = await axios.post(`https://search.torre.co/people/_search/?size=3`, req.body);
-      res.send(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.post('/search/people/full', async (req, res) => {
-  console.log(req.body);
-  try{
-    const response = await axios.post(`https://search.torre.co/people/_search/?size=100`, req.body);
-      res.send(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.post('/search/job', async (req, res) => {
-  console.log(req.body);
-  try{
-    const response = await axios.post(`https://search.torre.co/opportunities/_search?size=3`, req.body);
-      res.send(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.post('/search/job/full', async (req, res) => {
-  console.log(req.body);
-  try{
-    const response = await axios.post(`https://search.torre.co/opportunities/_search?size=100`, req.body);
-      res.send(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.post('/search/job/id', async (req, res) => {
-  console.log(req.body);
-  try{
-    const response = await axios.get(`https://torre.co/api/opportunities/${req.body.id}`);
+    const response = await axios.get(`https://restcountries.eu/rest/v2/name/${req.body.name}`);
       res.send(response.data);
   } catch (error) {
     console.error(error);
